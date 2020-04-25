@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'disks/home.css' %}">
+    <meta charset="UTF-8">
+    <title>Chinook</title>
+    <div style="display: inline-block;font-size: 40px;width: 30%"><strong>Chinook</strong></div>
+    <form class="search_form" id="search" action={% url "search" album_id %} method='get'>
+        <label for="search_field"></label>
+        <input type="text" id="search_field" placeholder="titre" name="titre">
+        <button type="submit" style="font-size: 25px">Recherche</button>
+    </form>
+    <br>
+</head>
+<body>
+    <div style="padding-top: 3%"></div>
+    <hr size="1" color="grey" width="95%">
+    <div style="display: inline;">
+        <table style="float: left;width: 40%;">
+            {% for album in albums %}
+            {% if album_display == album %}
+                {% if titre == '' %}
+                    <tr> <td class="choice" style="background-color: dimgray"><a href="{% url "search" album.id %}">{{album.title}}</a></td> </tr>
+                {% else %}
+                    <tr> <td class="choice" style="background-color: dimgray"><a href="{% url "search" album.id %}">{{album.title}}</a></td> </tr>
+                {% endif %}
+            {% else %}
+                {% if titre == '' %}
+                    <tr> <td class="choice"><a href="{% url "search" album.id %}">{{album.title}}</a></td> </tr>
+                {% else %}
+                    <tr> <td class="choice"><a href="{% url "search_select" album.id titre %}">{{album.title}}</a></td> </tr>
+                {% endif %}
+            {% endif %}
+            {% empty %}
+                Aucun Album à afficher
+            {% endfor %}
+        </table>
+        <div class="album_diplay_field">
+            {% if album_display != None%}
+                <div class="title">
+                    <div style="font-size: 30px">{{album_display.title}}</div>
+                    <hr size="1" color="grey">
+                    <br>
+                    Artiste : <div style="display: inline;font-weight: normal">{{album_display.artist.name}}</div>
+                    <br>
+                    Pistes
+                </div>
+                <div style="display: inline">
+                    <table style="float:left;width: 100%">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Compositeur</th>
+                        <th>Durée</th>
+                        <th>Prix</th>
+                    </tr>
+                    {% for track in tracks %}
+                        <tr>
+                            <td>{{track.name}}</td>
+                            <td>{{track.composer}}</td>
+                            <td>{{track.milliseconds}}</td>
+                            <td>{{track.unitprice}} $</td>
+                        </tr>
+                    {% empty %}
+
+                    {% endfor %}
+                    </table>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

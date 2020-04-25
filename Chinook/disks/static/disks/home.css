@@ -1,0 +1,51 @@
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+td a {
+    display: block;
+}
+.choice:hover {
+    background-color: dimgray;
+}
+a:link {
+    text-decoration: none;
+    color: black;
+}
+a:visited{
+    color: black;
+}
+
+.search_form{
+    text-align: right;
+    float:right;
+    width: 70%;
+}
+
+#search_field{
+    width: 40%;
+    font-size: 25px;
+}
+
+.album_title {
+    display: inline;
+}
+
+.album_diplay_field {
+    display: block;
+    float: left;
+    padding-left: 3%;
+    width: 55%;
+
+}
+
+.title {
+    font-size: 20px;
+    display: inline;
+    font-weight: bold;
+}
